@@ -37,5 +37,5 @@ fi
 
 echo "#### What version are we packaging the server for?"
 read packversion
-echo "Okay, I will use ${bold}$packversion${normal} of ${bold}$packslug${normal}, is that correct?"
+echo "Okay, I will create files for version ${bold}$packversion${normal} of ${bold}$packslug${normal}, is that correct?"
 
