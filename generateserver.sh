@@ -104,3 +104,4 @@ cd -
 echo "#### Download completed!"
 echo "#### Installing cauldron into server build directory..."
 
+unzip working_directories/cauldron/*.zip -d working_directories/$packslug/$packversion
