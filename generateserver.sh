@@ -120,7 +120,11 @@ packboth=$packslug$packseperator$packversion
 unzip working_directories/forge/*.zip -d working_directories/$packslug/$packversion
 unzip working_directories/packspecific/$packslug/$packslug.zip -d working_directories/$packslug/$packversion
 
-zip -r working_directories/downloads/$packslug/$packboth.zip working_directories/$packslug/$packversion
+cd working_directories/$packslug/$packversion
+
+zip -r ../../downloads/$packslug/$packboth.zip ./*
+
+cd -
 
 RSYNCURL="root@box.endermedia.com:/var/www/sites/solder.endermedia.com/TechnicSolder/public/repository/"
 
