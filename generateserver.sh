@@ -78,3 +78,6 @@ mkdir working_directories/$packslug/$packversion
 cp -a ~/Library/Application\ Support/technic/modpacks/$packslug/mods working_directories/$packslug/$packversion
 cp -a ~/Library/Application\ Support/technic/modpacks/$packslug/config working_directories/$packslug/$packversion
 
+#Cleanup client mods
+
+rm -f working_directories/$packslug/$packversion/mods/*-client.jar
