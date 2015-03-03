@@ -1,5 +1,6 @@
 bold=`tput bold`
 normal=`tput sgr0`
+
 echo "#### Welcome to EnderMedia Server Packager version 0.0.1"
 echo "#### Since you are a lazy son of a gun, I'm going to do everything for you"
 echo "#### If you can pry your fingers up for 2 small questions that would be great"
@@ -72,7 +73,9 @@ fi
 mkdir working_directories
 mkdir working_directories/$packslug
 mkdir working_directories/$packslug/$packversion
-mkdir working_directories/cauldron
+mkdir working_directories/forge
+mkdir working_directories/packspecific
+mkdir working_directories/packspecific/$packslug
 
 #Copy files from launcher instance
 
@@ -85,23 +88,29 @@ rm -f working_directories/$packslug/$packversion/mods/*-client*
 rm -f working_directories/$packslug/$packversion/mods/1.7.10/*-client*
 
 #Fetch specified cauldron package
-SERVERZIP="http://solder.endermedia.com/repository/internal/cauldron.zip"
-echo "#### Would you like to specify a custom cauldron.zip URL?"
+SERVERZIP="http://solder.endermedia.com/repository/internal/forgeserver.zip"
+SPECIFICZIP="http://solder.endermedia.com/repository/internal/$packslug.zip"
+echo "#### Would you like to specify a custom forgeserver.zip URL?"
 read -p " (y/n) " RESP
 if [ "$RESP" = "n" ]; then
   echo "#### We will use our file instead, consider yourself lucky, we have killer internet.";
 else
-  read -p "Please specify a server zip URL, cauldron preferred." SERVERZIP;
+  read -p "Please specify a server zip URL, forge or cauldron will work." SERVERZIP;
 fi
 
 
 echo "#### Downloading server files..."
 
-cd working_directories/cauldron
+cd working_directories/forge
 curl -O $SERVERZIP
 cd -
 
-echo "#### Download completed!"
-echo "#### Installing cauldron into server build directory..."
+cd working_directories/packspecific/$packslug
+curl -O $SPECIFICZIP
+cd -
 
-unzip working_directories/cauldron/*.zip -d working_directories/$packslug/$packversion
+echo "#### Download completed!"
+echo "#### Installing forge into server build directory..."
+
+unzip working_directories/forge/*.zip -d working_directories/$packslug/$packversion
+unzip working_directories/packspecific/$packslug/$packslug.zip -d working_directories/$packslug/$packversion
