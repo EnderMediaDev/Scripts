@@ -88,6 +88,7 @@ cp -av ~/Library/Application\ Support/technic/modpacks/$packslug/config working_
 
 rm -f working_directories/$packslug/$packversion/mods/*-client*
 rm -f working_directories/$packslug/$packversion/mods/1.7.10/*-client*
+rm -f working_directories/$packslug/$packversion/mods/VoxelMods
 
 #Fetch specified cauldron package
 SERVERZIP="http://solder.endermedia.com/repository/internal/forgeserver.zip"
