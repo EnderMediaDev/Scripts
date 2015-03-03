@@ -74,8 +74,10 @@ mkdir working_directories
 mkdir working_directories/$packslug
 mkdir working_directories/$packslug/$packversion
 mkdir working_directories/forge
-mkdir working_directories/packspecific
-mkdir working_directories/packspecific/$packslug
+mkdir working_directories/$packspecific
+mkdir working_directories/$packspecific/$packslug
+mkdir working_directories/downloads
+mkdir working_directories/downloads/$packslug
 
 #Copy files from launcher instance
 
@@ -114,3 +116,6 @@ echo "#### Installing forge into server build directory..."
 
 unzip working_directories/forge/*.zip -d working_directories/$packslug/$packversion
 unzip working_directories/packspecific/$packslug/$packslug.zip -d working_directories/$packslug/$packversion
+
+zip -r working_directories/downloads/$packslug/$packslug_$packversion.zip working_directories/$packslug/$packversion
+
