@@ -80,4 +80,5 @@ cp -a ~/Library/Application\ Support/technic/modpacks/$packslug/config working_d
 
 #Cleanup client mods
 
-rm -f working_directories/$packslug/$packversion/mods/*-client.jar
+rm -f working_directories/$packslug/$packversion/mods/*-client*
+rm -f working_directories/$packslug/$packversion/mods/1.7.10/*-client*
