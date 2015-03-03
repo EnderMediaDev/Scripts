@@ -39,3 +39,37 @@ echo "#### What version are we packaging the server for?"
 read packversion
 echo "Okay, I will create files for version ${bold}$packversion${normal} of ${bold}$packslug${normal}, is that correct?"
 
+
+read -p " (y/n) " RESP
+if [ "$RESP" = "y" ]; then
+  echo "Excellent, version ${bold}$packversion${normal} of ${bold}$packslug${normal} will be used."
+else
+  echo "#### Let's try again, what pack version would you like to generate a server for?";read packslug;echo "Okay, I will use ${bold}$packversion${normal} of ${bold}$packslug${normal}, is that correct?";read -p " (y/n) " RESP
+if [ "$RESP" = "y" ]; then
+  echo "Excellent, version ${bold}$packversion${normal} of ${bold}$packslug${normal} will be used."
+else
+  echo "#### Let's try again, what pack version would you like to generate a server for?";read packslug;echo "Okay, I will use ${bold}$packversion${normal} of ${bold}$packslug${normal}, is that correct?";read -p " (y/n) " RESP
+if [ "$RESP" = "y" ]; then
+  echo "Excellent, version ${bold}$packversion${normal} of ${bold}$packslug${normal} will be used."
+else
+  echo "#### Let's try again, what pack version would you like to generate a server for?";read packslug;echo "Okay, I will use ${bold}$packversion${normal} of ${bold}$packslug${normal}, is that correct?";read -p " (y/n) " RESP
+if [ "$RESP" = "y" ]; then
+  echo "Excellent, version ${bold}$packversion${normal} of ${bold}$packslug${normal} will be used."
+else
+  echo "#### Let's try again, what pack version would you like to generate a server for?";read packslug;echo "Okay, I will use ${bold}$packversion${normal} of ${bold}$packslug${normal}, is that correct?";read -p " (y/n) " RESP
+if [ "$RESP" = "y" ]; then
+  echo echo "Excellent, version ${bold}$packversion${normal} of ${bold}$packslug${normal} will be used."
+else
+  echo "#### I gave you 5 tries, we are done here.";exit;
+fi
+fi
+fi
+fi
+fi
+
+mkdir working_directory
+mkdir working_directory/mods
+mkdir working_directory/config
+
+cp -a ~/Library/Application\ Support/technic/modpacks/$packslug/mods/* /mods
+cp -a ~/Library/Application\ Support/technic/modpacks/$packslug/config/* /config
