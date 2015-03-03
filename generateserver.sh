@@ -124,12 +124,12 @@ zip -r working_directories/downloads/$packslug/$packboth.zip working_directories
 
 RSYNCURL="root@box.endermedia.com:/var/www/sites/solder.endermedia.com/TechnicSolder/public/repository/"
 
-echo "#### Would you like to specify a custom RSYNC URL?"
+echo "#### Would you like to specify a custom RSYNC URL? If you don't know what this is, just answer no."
 read -p " (y/n) " RESP
 if [ "$RESP" = "n" ]; then
-  echo "#### Using default RSYNC URL, if you don't know what this is, just answer no.";
+  echo "#### Using default RSYNC URL...";
 else
   read -p "Please specify an RSYNC URL, you will be asked for the password next." RSYNCURL;
 fi
 
-rsync -azvr --password-file=rsync_pass working_directories/downloads $RSYNCURL
+rsync -azvr --progress working_directories/downloads $RSYNCURL
