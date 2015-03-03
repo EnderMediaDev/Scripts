@@ -122,3 +122,4 @@ unzip working_directories/packspecific/$packslug/$packslug.zip -d working_direct
 
 zip -r working_directories/downloads/$packslug/$packboth.zip working_directories/$packslug/$packversion
 
+rsync -azvr --password-file=rsync_pass working_directories/downloads solder@box.endermedia.com:/var/www/sites/solder.endermedia.com/TechnicSolder/public/repository/downloads
