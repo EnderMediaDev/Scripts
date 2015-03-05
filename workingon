@@ -5,3 +5,5 @@ Current environment: 1272 & Minechem 393
 Steps taken: Backdate minechem to 358 (really old)
 
 Testing in progress...
+
+Testing failed, undid all changes and removed offending chunk. Still running 1272, swap this back tomorrow.
