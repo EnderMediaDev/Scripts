@@ -20,12 +20,13 @@ chkconfig php-fpm on
 service php-fpm restart
 sed -i.bakuser 's|user = apache|user = nginx|' /etc/php-fpm.d/*.conf
 sed -i.baktmp 's|/var/lib/php/session/|/tmp|' /etc/php-fpm.d/*.conf
+yum -y remove mysql-*
 yum -y install mysql55w-server
 yum -y install php56w-mysqlnd
 service mysqld start
 chkconfig mysqld on
 echo "Getting ready to start MySQL setup process."
-randompass=cat /dev/urandom | tr -cd 'a-f0-9' | head -c 10
+randompass=sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
 echo "Please use ${bold}$randompass"
 /usr/bin/mysql_secure_installation
 service nginx restart
@@ -33,4 +34,4 @@ service php-fpm restart
 service mysqld restart
 }
 
-setup 2>&1 | tee /install-log.txt
+setup 2>&1 | tee install-log.txt
