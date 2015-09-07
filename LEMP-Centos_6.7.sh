@@ -62,9 +62,10 @@ yum -y --enablerepo=remi install phpMyAdmin
 echo "============================================================"
 echo "##### Adding port 80 and 8080 to firewall."
 echo "============================================================"
-iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT
+iptables -I INPUT 5 -m state --state NEW -p tcp --dport 8080 -j ACCEPT
+iptables -I INPUT 5 -m state --state NEW -p tcp --dport 80 -j ACCEPT
 /sbin/service iptables save
+service iptables restart
 echo "============================================================"
 echo "##### INSTALLATION COMPLETE"
 echo "##### THANK YOU FOR USING CIAK2009 LEMP SCRIPT"
