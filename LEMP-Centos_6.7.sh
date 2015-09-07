@@ -31,6 +31,7 @@ echo "Getting ready to start MySQL setup process."
 echo "Please use this password:"
 echo ""
 sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
+echo ""
 echo "Starting installation..."
 /usr/bin/mysql_secure_installation
 service nginx restart
