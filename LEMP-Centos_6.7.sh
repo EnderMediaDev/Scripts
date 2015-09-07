@@ -3,8 +3,8 @@ normal=`tput sgr0`
 
 setup() {
 
-echo "Welcome to the EnderMedia Server Deployment Script"
-echo "PLEASE ENSURE YOU ARE RUNNING THIS AS ROOT"
+printf "Welcome to the EnderMedia Server Deployment Script"
+printf "PLEASE ENSURE YOU ARE RUNNING THIS AS ROOT"
 
 yum -y install epel-release
 rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
@@ -20,19 +20,27 @@ service php-fpm start
 chkconfig php-fpm on
 service php-fpm restart
 sed -i.bakuser 's|user = apache|user = nginx|' /etc/php-fpm.d/*.conf
-sed -i.baktmp 's|/var/lib/php/session/|/tmp|' /etc/php-fpm.d/*.conf
+sed -i.bakgroup 's|group = apache|group = nginx|' /etc/php-fpm.d/*.conf
+sed -i.baktmp 's|/var/lib/php/session|/tmp|' /etc/php-fpm.d/*.conf
 yum -y replace mysql-libs --replace-with mysql55w-libs
 yum -y install mysql55w-server
 yum -y install php56w-mysqlnd
 service mysqld start
 chkconfig mysqld on
-echo "Getting ready to start MySQL setup process."
-echo "Please use this password:" && randompass=sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
-echo "Starting installation"
+printf "Getting ready to start MySQL setup process."
+printf "Please use this password:" && randompass=sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
+printf "Starting installation"
 /usr/bin/mysql_secure_installation
 service nginx restart
 service php-fpm restart
 service mysqld restart
+
+rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+yum --enablerepo=remi install phpMyAdmin
+
+mkdir /usr/share/nginx/sites-enabled
+mkdir /usr/share/nginx/sites-available
+
 }
 
 setup 2>&1 | tee install-log.txt
