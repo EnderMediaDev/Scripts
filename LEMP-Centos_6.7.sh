@@ -8,9 +8,9 @@ echo "PLEASE ENSURE YOU ARE RUNNING THIS AS ROOT"
 
 yum -y install epel-release
 rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
+yum -y install perl perl-Net-SSLeay openssl perl-IO-Tty wget
 wget http://prdownloads.sourceforge.net/webadmin/webmin-1.760-1.noarch.rpm
 yum -y install yum-plugin-replace
-yum -y install perl perl-Net-SSLeay openssl perl-IO-Tty
 rpm -U webmin-1.760-1.noarch.rpm
 yum -y install nginx
 service nginx start
