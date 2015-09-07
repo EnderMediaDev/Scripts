@@ -90,6 +90,11 @@ rm -f working_directories/$packslug/$packversion/mods/*-client*
 rm -f working_directories/$packslug/$packversion/mods/1.7.10/*-client*
 rm -f working_directories/$packslug/$packversion/mods/VoxelMods
 
+#Manual cleanup in case of an oopsie.
+
+rm -f working_directories/$packslug/$packversion/mods/*fastcraft*
+
+
 #Fetch specified cauldron package
 SERVERZIP="http://solder.endermedia.com/repository/internal/forgeserver.zip"
 SPECIFICZIP="http://solder.endermedia.com/repository/internal/$packslug.zip"
