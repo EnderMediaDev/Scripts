@@ -39,8 +39,9 @@ chkconfig mysqld on
 echo "============================================================"
 echo "Getting ready to start MySQL setup process."
 echo "Please use this password:"
-echo ""
+echo "============================================================"
 sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
+echo ""
 echo "============================================================"
 echo "Starting installation..."
 echo "============================================================"
