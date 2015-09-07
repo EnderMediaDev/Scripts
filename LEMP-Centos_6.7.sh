@@ -3,13 +3,13 @@ normal=`tput sgr0`
 
 setup() {
 
-printf "Welcome to the EnderMedia Server Deployment Script"
-printf "PLEASE ENSURE YOU ARE RUNNING THIS AS ROOT"
+echo "Welcome to the EnderMedia Server Deployment Script"
+echo "PLEASE ENSURE YOU ARE RUNNING THIS AS ROOT"
 
 yum -y install epel-release
 rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
 yum -y install perl perl-Net-SSLeay openssl perl-IO-Tty wget
-wget http://prdownloads.sourceforge.net/webadmin/webmin-1.760-1.noarch.rpm
+wget -nv http://prdownloads.sourceforge.net/webadmin/webmin-1.760-1.noarch.rpm
 yum -y install yum-plugin-replace
 rpm -U webmin-1.760-1.noarch.rpm
 yum -y install nginx
@@ -27,20 +27,25 @@ yum -y install mysql55w-server
 yum -y install php56w-mysqlnd
 service mysqld start
 chkconfig mysqld on
-printf "Getting ready to start MySQL setup process."
-printf "Please use this password:" && randompass=sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
-printf "Starting installation"
+echo "Getting ready to start MySQL setup process."
+echo "Please use this password:"
+echo ""
+sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
+echo "Starting installation..."
 /usr/bin/mysql_secure_installation
 service nginx restart
 service php-fpm restart
 service mysqld restart
 
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-yum --enablerepo=remi install phpMyAdmin
+yum -y --enablerepo=remi install phpMyAdmin
 
 mkdir /usr/share/nginx/sites-enabled
 mkdir /usr/share/nginx/sites-available
 
+iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT
+/sbin/service iptables save
 }
 
 setup 2>&1 | tee install-log.txt
