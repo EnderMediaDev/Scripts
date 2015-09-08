@@ -31,8 +31,9 @@ service php-fpm restart
 sed -i.bakuser 's|user = apache|user = nginx|' /etc/php-fpm.d/*.conf
 sed -i.bakgroup 's|group = apache|group = nginx|' /etc/php-fpm.d/*.conf
 sed -i.baktmp 's|/var/lib/php/session|/tmp|' /etc/php-fpm.d/*.conf
-yum -y replace mysql-libs --replace-with mysql55w-libs
-yum -y install mysql55w-server
+rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+yum -y replace --enablerepo=remi mysql-libs --replace-with mysql-libs
+yum -y install --enablerepo=remi mysql-server
 yum -y install --enablerepo=webtatic-testing php70w-mysqlnd
 service mysqld start
 chkconfig mysqld on
@@ -82,3 +83,4 @@ echo "==========================================================================
 }
 
 setup 2>&1 | tee install-log.txt
+yu
