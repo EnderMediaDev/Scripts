@@ -24,7 +24,7 @@ service nginx start
 chkconfig nginx on
 mkdir /etc/nginx/sites-enabled
 mkdir /etc/nginx/sites-available
-yum -y install --enablerepo=webtatic-testing php70w-fpm php70w-common php70w-cli php70w-gd php70w-imap php70w-ldap php70w-odbc php70w-pear php70w-xml php70w-xmlrpc php70w-mbstring php70w-mcrypt php70w-mssql php70w-snmp php70w-soap php70w-tidy php-php-gettext apr-util-ldap mailcap
+yum -y install --enablerepo=webtatic-testing php70w-fpm php70w-mysql php70w-mysqli php70w-common php70w-cli php70w-gd php70w-imap php70w-ldap php70w-odbc php70w-pear php70w-xml php70w-xmlrpc php70w-mbstring php70w-mcrypt php70w-mssql php70w-snmp php70w-soap php70w-tidy php-php-gettext apr-util-ldap mailcap
 service php-fpm start
 chkconfig php-fpm on
 service php-fpm restart
@@ -55,10 +55,15 @@ service nginx restart
 service php-fpm restart
 service mysqld restart
 echo "============================================================"
-echo "##### Installing phpMyAdmin..."
+echo "##### Installing phpMyAdmin Custom for PHP 7..."
 echo "============================================================"
-rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-yum -y --enablerepo=remi install phpMyAdmin
+cd /usr/share/
+wget -nv https://files.phpmyadmin.net/phpMyAdmin/4.4.14/phpMyAdmin-4.4.14-all-languages.tar.bz2
+tar -xvf phpMyAdmin-*
+mv phpMyAdmin-*-all-languages phpMyAdmin
+cd phpMyAdmin
+cp config.sample.inc.php config.inc.php
+sed -i.bakcfg 's|$cfg['blowfish_secret'] = ''|$cfg['blowfish_secret'] = 'D{F3}s+TJodRbMKo2|v}D|8LL]R]@RLfEu#vZ'|' /usr/share/phpmyadmin/config.inc.php
 echo "============================================================"
 echo "##### Adding port 80, 8080 and 10000 to firewall."
 echo "============================================================"
