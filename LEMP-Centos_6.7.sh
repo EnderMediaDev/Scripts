@@ -3,22 +3,22 @@ normal=`tput sgr0`
 
 setup() {
 
-echo "============================================================"
+echo "================================================================================"
 echo "##### Welcome to the EnderMedia Server Deployment Script"
 echo "##### PLEASE ENSURE YOU ARE RUNNING THIS AS ROOT"
-echo "============================================================"
+echo "================================================================================"
 yum -y install epel-release
 rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
 yum -y install perl perl-Net-SSLeay openssl perl-IO-Tty wget
-echo "============================================================"
+echo "================================================================================"
 echo "##### Starting Webmin Installation..."
-echo "============================================================"
+echo "================================================================================"
 wget -nv http://prdownloads.sourceforge.net/webadmin/webmin-1.760-1.noarch.rpm
 yum -y install yum-plugin-replace
 rpm -U webmin-1.760-1.noarch.rpm
-echo "============================================================"
+echo "================================================================================"
 echo "##### Installing NGINX, PHP and MYSQL"
-echo "============================================================"
+echo "================================================================================"
 yum -y install nginx
 service nginx start
 chkconfig nginx on
@@ -36,42 +36,42 @@ yum -y install mysql55w-server
 yum -y install php56w-mysqlnd
 service mysqld start
 chkconfig mysqld on
-echo "============================================================"
+echo "================================================================================"
 echo "Getting ready to start MySQL setup process."
 echo "Please use this password:"
-echo "============================================================"
+echo "================================================================================"
 echo ""
 sudo < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10
 echo ""
 echo ""
-echo "============================================================"
+echo "================================================================================"
 echo "Starting installation..."
-echo "============================================================"
+echo "================================================================================"
 /usr/bin/mysql_secure_installation
-echo "============================================================"
+echo "================================================================================"
 echo "##### Restarting services..."
-echo "============================================================"
+echo "================================================================================"
 service nginx restart
 service php-fpm restart
 service mysqld restart
-echo "============================================================"
+echo "================================================================================"
 echo "##### Installing phpMyAdmin..."
-echo "============================================================"
+echo "================================================================================"
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 yum -y --enablerepo=remi install phpMyAdmin
-echo "============================================================"
+echo "================================================================================"
 echo "##### Adding port 80, 8080 and 10000 to firewall."
-echo "============================================================"
+echo "================================================================================"
 iptables -I INPUT 5 -m state --state NEW -p tcp --dport 10000 -j ACCEPT
 iptables -I INPUT 5 -m state --state NEW -p tcp --dport 8080 -j ACCEPT
 iptables -I INPUT 5 -m state --state NEW -p tcp --dport 80 -j ACCEPT
 /sbin/service iptables save
 service iptables restart
-echo "============================================================"
+echo "================================================================================"
 echo "##### INSTALLATION COMPLETE"
 echo "##### THANK YOU FOR USING CIAK2009 LEMP SCRIPT"
 echo "##### GOODBYE MY DEAR FRIEND, I WILL MISS YOU."
-echo "============================================================"
+echo "================================================================================"
 }
 
 setup 2>&1 | tee install-log.txt
