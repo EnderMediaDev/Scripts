@@ -24,7 +24,7 @@ service nginx start
 chkconfig nginx on
 mkdir /etc/nginx/sites-enabled
 mkdir /etc/nginx/sites-available
-yum -y install php56w-fpm php56w-common php56w-cli php56w-gd php56w-imap php56w-ldap php56w-odbc php56w-pear php56w-xml php56w-xmlrpc php56w-mbstring php56w-mcrypt php56w-mssql php56w-snmp php56w-soap php56w-tidy php-php-gettext apr-util-ldap mailcap
+yum -y install --enablerepo=webtatic-testing php70w-fpm php70w-common php70w-cli php70w-gd php70w-imap php70w-ldap php70w-odbc php70w-pear php70w-xml php70w-xmlrpc php70w-mbstring php70w-mcrypt php70w-mssql php70w-snmp php70w-soap php70w-tidy php-php-gettext apr-util-ldap mailcap
 service php-fpm start
 chkconfig php-fpm on
 service php-fpm restart
@@ -33,7 +33,7 @@ sed -i.bakgroup 's|group = apache|group = nginx|' /etc/php-fpm.d/*.conf
 sed -i.baktmp 's|/var/lib/php/session|/tmp|' /etc/php-fpm.d/*.conf
 yum -y replace mysql-libs --replace-with mysql55w-libs
 yum -y install mysql55w-server
-yum -y install php56w-mysqlnd
+yum -y install php70w-mysqlnd
 service mysqld start
 chkconfig mysqld on
 echo "============================================================"
