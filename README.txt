@@ -1,5 +1,5 @@
 Welcome to the sheer glory of my server generation script.
-
+test
 Requirements to use:
 - Technic Launcher
 - Pack installed for each server you want to generate
