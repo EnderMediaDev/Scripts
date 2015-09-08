@@ -24,7 +24,7 @@ service nginx start
 chkconfig nginx on
 mkdir /etc/nginx/sites-enabled
 mkdir /etc/nginx/sites-available
-yum -y install --enablerepo=webtatic-testing php70w-fpm php70w-mysql php70w-mysqli php70w-common php70w-cli php70w-gd php70w-imap php70w-ldap php70w-odbc php70w-pear php70w-xml php70w-xmlrpc php70w-mbstring php70w-mcrypt php70w-mssql php70w-snmp php70w-soap php70w-tidy php-php-gettext apr-util-ldap mailcap
+yum -y install --enablerepo=webtatic-testing php70w-fpm php70w-common php70w-cli php70w-gd php70w-imap php70w-ldap php70w-odbc php70w-pear php70w-xml php70w-xmlrpc php70w-mbstring php70w-mcrypt php70w-mssql php70w-snmp php70w-soap php70w-tidy php-php-gettext apr-util-ldap mailcap
 service php-fpm start
 chkconfig php-fpm on
 service php-fpm restart
