@@ -64,8 +64,8 @@ mv phpMyAdmin-*-all-languages phpMyAdmin
 cd phpMyAdmin
 cp config.sample.inc.php config.inc.php
 echo "================================================================================"
-echo "Please use this blowfish: D{F3}s+TJodRbMKo2|v}D|8LL]R]@RLfEu#vZ, matching this."
-echo "### $cfg['blowfish_secret'] = 'D{F3}s+TJodRbMKo2|v}D|8LL]R]@RLfEu#vZ'; ###"
+echo "Please use this blowfish: 3g9RaV09VE4oi9p1vvaYPhWgDRUuyrU99jit0sN0, matching this."
+echo "### $cfg['blowfish_secret'] = '3g9RaV09VE4oi9p1vvaYPhWgDRUuyrU99jit0sN0'; ###"
 echo "================================================================================"
 echo "##### Adding port 80, 8080 and 10000 to firewall."
 echo "================================================================================"
