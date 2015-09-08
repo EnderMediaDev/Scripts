@@ -33,7 +33,7 @@ sed -i.bakgroup 's|group = apache|group = nginx|' /etc/php-fpm.d/*.conf
 sed -i.baktmp 's|/var/lib/php/session|/tmp|' /etc/php-fpm.d/*.conf
 yum -y replace mysql-libs --replace-with mysql70w-libs
 yum -y install mysql55w-server
-yum -y install php70w-mysqlnd
+yum -y install --enablerepo=webtatic-testing php70w-mysqlnd
 service mysqld start
 chkconfig mysqld on
 echo "================================================================================"
