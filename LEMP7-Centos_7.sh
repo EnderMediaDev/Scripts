@@ -52,9 +52,11 @@ sed -i.bakuser 's|user = apache|user = nginx|' /etc/php-fpm.d/*.conf
 sed -i.bakgroup 's|group = apache|group = nginx|' /etc/php-fpm.d/*.conf
 sed -i.baktmp 's|/var/lib/php/session|/tmp|' /etc/php-fpm.d/*.conf
 #rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-yum -y replace --enablerepo=remi mysql-libs --replace-with mysql-libs
-yum -y install --enablerepo=remi mysql-server
-yum -y install --enablerepo=remi-php70 php-mysqlnd
+yum -y install --enablerepo=remi-php70 php-mysqld
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+rpm -ivh mysql-community-release-el7-5.noarch.rpm
+yum -y update
+yum install mysql-server
 systemctl start mysqld
 systemctl enable mysqld
 echo "================================================================================"
@@ -97,6 +99,7 @@ echo "FIREWALLD: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 8080 -j
 firewall-cmd --permanent --zone=public --add-port=8080/tcp
 echo "FIREWALLD: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 80 -j ACCEPT"
 firewall-cmd --permanent --zone=public --add-port=80/tcp
+echo "FIREWALLD: Realoading..."
 firewall-cmd --reload
 systemctl start firewalld
 #/sbin/service iptables save
