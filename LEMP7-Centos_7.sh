@@ -9,7 +9,7 @@ echo "##### PLEASE ENSURE YOU ARE RUNNING THIS AS ROOT"
 echo "================================================================================"
 yum -y install epel-release yum-utils -y
 yum -y install wget
-yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 #rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
 yum -y install perl perl-Net-SSLeay openssl perl-IO-Tty perl-Encode-Detect
 echo "================================================================================"
