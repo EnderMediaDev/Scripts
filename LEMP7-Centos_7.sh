@@ -25,9 +25,17 @@ yum -y install fish
 echo "================================================================================"
 echo "##### Starting Webmin Installation..."
 echo "================================================================================"
-wget -nv wget http://prdownloads.sourceforge.net/webadmin/webmin-1.900-1.noarch.rpm
+#wget -nv wget http://prdownloads.sourceforge.net/webadmin/webmin-1.900-1.noarch.rpm
 yum -y install yum-plugin-replace
-rpm -U webmin-1.900-1.noarch.rpm
+#rpm -U webmin-1.900-1.noarch.rpm
+echo "[Webmin]
+name=Webmin Distribution Neutral
+#baseurl=https://download.webmin.com/download/yum
+mirrorlist=https://download.webmin.com/download/yum/mirrorlist
+enabled=1" > /etc/yum.repos.d/webmin.repo
+wget http://www.webmin.com/jcameron-key.asc
+rpm --import jcameron-key.asc
+yum -y install webmin
 echo "================================================================================"
 echo "##### Installing NGINX, PHP and MYSQL"
 echo "================================================================================"
@@ -76,7 +84,7 @@ echo "==========================================================================
 #mv phpMyAdmin-*-all-languages phpMyAdmin
 #cd phpMyAdmin
 #cp config.sample.inc.php config.inc.php
-yum -y install phpmyadmin
+yum -y install --enablerepo=remi-php70 phpmyadmin
 echo "================================================================================"
 echo "Please use this blowfish: 3g9RaV09VE4oi9p1vvaYPhWgDRUuyrU99jit0sN0, matching this."
 echo "### $cfg['blowfish_secret'] = '3g9RaV09VE4oi9p1vvaYPhWgDRUuyrU99jit0sN0'; ###"
