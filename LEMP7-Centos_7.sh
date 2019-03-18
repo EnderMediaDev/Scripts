@@ -26,7 +26,7 @@ echo "==========================================================================
 echo "##### Starting Webmin Installation..."
 echo "================================================================================"
 #wget -nv wget http://prdownloads.sourceforge.net/webadmin/webmin-1.900-1.noarch.rpm
-yum -y install yum-plugin-replace
+#yum -y install yum-plugin-replace
 #rpm -U webmin-1.900-1.noarch.rpm
 echo "[Webmin]
 name=Webmin Distribution Neutral
@@ -52,11 +52,11 @@ sed -i.bakuser 's|user = apache|user = nginx|' /etc/php-fpm.d/*.conf
 sed -i.bakgroup 's|group = apache|group = nginx|' /etc/php-fpm.d/*.conf
 sed -i.baktmp 's|/var/lib/php/session|/tmp|' /etc/php-fpm.d/*.conf
 #rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-yum -y install --enablerepo=remi-php70 php-mysqld
+yum -y install --enablerepo=remi-php70 php-mysqlnd
 wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
 rpm -ivh mysql-community-release-el7-5.noarch.rpm
 yum -y update
-yum install mysql-server
+yum -y install mysql-server
 systemctl start mysqld
 systemctl enable mysqld
 echo "================================================================================"
@@ -87,6 +87,7 @@ echo "==========================================================================
 #cd phpMyAdmin
 #cp config.sample.inc.php config.inc.php
 yum -y install --enablerepo=remi-php70 phpmyadmin
+yum -y install git
 echo "================================================================================"
 echo "Please use this blowfish: 3g9RaV09VE4oi9p1vvaYPhWgDRUuyrU99jit0sN0, matching this."
 echo "### $cfg['blowfish_secret'] = '3g9RaV09VE4oi9p1vvaYPhWgDRUuyrU99jit0sN0'; ###"
