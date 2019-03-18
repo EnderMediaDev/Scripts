@@ -36,7 +36,6 @@ enabled=1" > /etc/yum.repos.d/webmin.repo
 wget http://www.webmin.com/jcameron-key.asc
 rpm --import jcameron-key.asc
 yum -y install webmin
-systemctl start webmin
 echo "================================================================================"
 echo "##### Installing NGINX, PHP and MYSQL"
 echo "================================================================================"
