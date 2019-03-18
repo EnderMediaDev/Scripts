@@ -91,9 +91,14 @@ echo "### $cfg['blowfish_secret'] = '3g9RaV09VE4oi9p1vvaYPhWgDRUuyrU99jit0sN0'; 
 echo "================================================================================"
 echo "##### Adding port 80, 8080 and 10000 to firewall."
 echo "================================================================================"
-echo "CONFIGURE MANUALLY: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 10000 -j ACCEPT"
-echo "CONFIGURE MANUALLY: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 8080 -j ACCEPT"
-echo "CONFIGURE MANUALLY: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 80 -j ACCEPT"
+echo "FIREWALLD: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 10000 -j ACCEPT"
+firewall-cmd --permanent --zone=public --add-port=10000/tcp
+echo "FIREWALLD: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 8080 -j ACCEPT"
+firewall-cmd --permanent --zone=public --add-port=8080/tcp
+echo "FIREWALLD: iptables -I INPUT 5 -m state --state NEW -p tcp --dport 80 -j ACCEPT"
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --reload
+systemctl start firewalld
 #/sbin/service iptables save
 #service iptables restart
 echo "================================================================================"
